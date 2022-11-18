@@ -24,6 +24,15 @@ app.use(bodyParser.json())
 app.use(cookieParser());
 app.use(cors());
 
+
+MongoClient.connect(mongoUrl, (err, client) => {
+    if (err) console.log(`Error While Connecting`);
+    user = client.db('eduInternJan');
+    app.listen(PORT, () => {
+        console.log(`server is running on port ${PORT}`)
+    })
+})
+
 // database connection
 mongoose.Promise = global.Promise;
 mongoose.connect(db.DATABASE, { useNewUrlParser: true, useUnifiedTopology: true }, function (err) {
@@ -37,13 +46,13 @@ app.get('/', function (req, res) {
 })
 
 
-MongoClient.connect(mongoUrl, (err, client) => {
-    if (err) console.log(`Error While Connecting`);
-    user = client.db('eduInternJan');
-    app.listen(PORT, () => {
-        console.log(`server is running on port ${PORT}`)
-    })
-})
+// MongoClient.connect(mongoUrl, (err, client) => {
+//     if (err) console.log(`Error While Connecting`);
+//     user = client.db('eduInternJan');
+//     app.listen(PORT, () => {
+//         console.log(`server is running on port ${PORT}`)
+//     })
+// })
 
 // adding new user (sign-up route)
 app.post('/api/register', function (req, res) {
