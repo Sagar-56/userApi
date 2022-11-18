@@ -4,10 +4,10 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const mongo = require('mongodb');
 const MongoClient = mongo.MongoClient;
-// const dotenv = require('dotenv');
-// dotenv.config();
-const router = express.Router();
-router.use(express.json());
+const dotenv = require('dotenv');
+dotenv.config();
+// const router = express.Router();
+// router.use(express.json());
 
 const PORT = process.env.PORT || 9300;
 const mongoUrl = "mongodb+srv://Sagarbehera:Sagar456@cluster0.96hmj.mongodb.net/eduInternJan?retryWrites=true&w=majority";
@@ -24,7 +24,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 app.use(cookieParser());
 app.use(cors());
-router.use(cors());
+// router.use(cors());
 
 
 MongoClient.connect(mongoUrl, (err, client) => {
