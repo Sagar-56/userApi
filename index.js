@@ -9,7 +9,7 @@ const MongoClient = mongo.MongoClient;
 const router = express.Router();
 router.use(express.json());
 
-const PORT = process.env.PORT || 2000;
+const PORT = process.env.PORT || 9300;
 const mongoUrl = "mongodb+srv://Sagarbehera:Sagar456@cluster0.96hmj.mongodb.net/eduInternJan?retryWrites=true&w=majority";
 
 const db = require('./configs/config').get(process.env.NODE_ENV);
@@ -20,7 +20,7 @@ const cors = require('cors')
 
 const app = express();
 
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 app.use(cookieParser());
 app.use(cors());
