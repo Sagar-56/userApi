@@ -4,13 +4,13 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const mongo = require('mongodb');
 const MongoClient = mongo.MongoClient;
-const dotenv = require('dotenv');
-dotenv.config();
+// const dotenv = require('dotenv');
+// dotenv.config();
 // const router = express.Router();
 // router.use(express.json());
 
 const PORT = process.env.PORT || 9300;
-const mongoUrl = "mongodb+srv://Sagarbehera:Sagar456@cluster0.96hmj.mongodb.net/eduInternJan?retryWrites=true&w=majority";
+const DATABASE = "mongodb+srv://Sagarbehera:Sagar456@cluster0.96hmj.mongodb.net/eduInternJan?retryWrites=true&w=majority";
 
 const db = require('./configs/config').get(process.env.NODE_ENV);
 const User = require('./models/users');
@@ -27,7 +27,7 @@ app.use(cors());
 // router.use(cors());
 
 
-MongoClient.connect(mongoUrl, (err, client) => {
+MongoClient.connect(DATABASE, (err, client) => {
     if (err) console.log(`Error While Connecting`);
     user = client.db('eduInternJan');
     app.listen(PORT, () => {
@@ -36,11 +36,11 @@ MongoClient.connect(mongoUrl, (err, client) => {
 })
 
 // database connection
-mongoose.Promise = global.Promise;
-mongoose.connect(db.DATABASE, { useNewUrlParser: true, useUnifiedTopology: true }, function (err) {
-    if (err) console.log(err);
-    console.log("database is connected");
-})
+// mongoose.Promise = global.Promise;
+// mongoose.connect(db.DATABASE, { useNewUrlParser: true, useUnifiedTopology: true }, function (err) {
+//     if (err) console.log(err);
+//     console.log("database is connected");
+// })
 
 
 app.get('/', function (req, res) {
