@@ -6,6 +6,9 @@ const mongo = require('mongodb');
 const MongoClient = mongo.MongoClient;
 // const dotenv = require('dotenv');
 // dotenv.config();
+const router = express.Router();
+router.use(express.json());
+
 const PORT = process.env.PORT || 2000;
 const mongoUrl = "mongodb+srv://Sagarbehera:Sagar456@cluster0.96hmj.mongodb.net/eduInternJan?retryWrites=true&w=majority";
 
@@ -21,6 +24,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(cookieParser());
 app.use(cors());
+router.use(cors());
 
 
 MongoClient.connect(mongoUrl, (err, client) => {
