@@ -2,7 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-// const { urlencoded } = require('body-parser');
+const { urlencoded } = require('body-parser');
 const db = require('./configs/config').get(process.env.NODE_ENV);
 const User = require('./models/users');
 const { auth } = require('./middleware/auth');
@@ -104,7 +104,7 @@ app.get('/api/logout', auth, function (req, res) {
 });
 
 // listing port
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 2000;
 
 app.listen(PORT, () => {
     console.log(`app is running ${PORT}`)
