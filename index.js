@@ -3,6 +3,14 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const { urlencoded } = require('body-parser');
+const mongo = require('mongodb');
+const MongoClient = mongo.MongoClient;
+const dotenv = require('dotenv');
+dotenv.config();
+const PORT = process.env.PORT || 2000;
+const mongoUrl = "mongodb+srv://Sagarbehera:Sagar456@cluster0.96hmj.mongodb.net/eduInternJan?retryWrites=true&w=majority";
+
+
 const db = require('./configs/config').get(process.env.NODE_ENV);
 const User = require('./models/users');
 const { auth } = require('./middleware/auth');
@@ -26,6 +34,15 @@ mongoose.connect(db.DATABASE, { useNewUrlParser: true, useUnifiedTopology: true 
 
 app.get('/', function (req, res) {
     res.status(200).send("welcome to login, signup Api")
+})
+
+
+MongoClient.connect(mongoUrl, (err, client) => {
+    if (err) console.log(`Error While Connecting`);
+    user = client.db('eduInternJan');
+    app.listen(PORT, () => {
+        console.log(`server is running on port ${PORT}`)
+    })
 })
 
 // adding new user (sign-up route)
@@ -104,8 +121,8 @@ app.get('/api/logout', auth, function (req, res) {
 });
 
 // listing port
-const PORT = process.env.PORT || 2000;
+// const PORT = process.env.PORT || 2000;
 
-app.listen(PORT, () => {
-    console.log(`app is running ${PORT}`)
-})
+// app.listen(PORT, () => {
+//     console.log(`app is running ${PORT}`)
+// })
