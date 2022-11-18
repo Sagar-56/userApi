@@ -7,7 +7,7 @@ const MongoClient = mongo.MongoClient;
 // const dotenv = require('dotenv');
 // dotenv.config();
 const PORT = process.env.PORT || 2000;
-const DATABASE = "mongodb+srv://Sagarbehera:Sagar456@cluster0.96hmj.mongodb.net/eduInternJan?retryWrites=true&w=majority";
+const mongoUrl = "mongodb+srv://Sagarbehera:Sagar456@cluster0.96hmj.mongodb.net/eduInternJan?retryWrites=true&w=majority";
 
 const db = require('./configs/config').get(process.env.NODE_ENV);
 const User = require('./models/users');
@@ -23,7 +23,7 @@ app.use(cookieParser());
 app.use(cors());
 
 
-MongoClient.connect(DATABASE, (err, client) => {
+MongoClient.connect(mongoUrl, (err, client) => {
     if (err) console.log(`Error While Connecting`);
     user = client.db('eduInternJan');
     app.listen(PORT, () => {
