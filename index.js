@@ -27,9 +27,9 @@ app.use(cors());
 // router.use(cors());
 
 
- MongoClient.connect(DATABASE,async (err, client) => {
+ MongoClient.connect(DATABASE, (err, client) => {
     if (err) console.log(`Error While Connecting`);
-    user =await client.db('eduInternJan');
+    user = client.db('eduInternJan');
     app.listen(PORT, () => {
         console.log(`server is running on port ${PORT}`)
     })
