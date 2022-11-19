@@ -4,7 +4,6 @@
   "description": "signup/signin api",
   "main": "index.js",
   "scripts": {
-    "postinstall": "npm run build",
     "start": "node index.js",
     "dev": "nodemon index.js"
   },
