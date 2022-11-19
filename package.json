@@ -4,8 +4,8 @@
   "description": "signup/signin api",
   "main": "index.js",
   "scripts": {
-    "start": "node signup",
-    "dev": "nodemon signup"
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
   "keywords": [
     "liveApi"
