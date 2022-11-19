@@ -4,8 +4,8 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const mongo = require('mongodb');
 const MongoClient = mongo.MongoClient;
-// const dotenv = require('dotenv');
-// dotenv.config();
+const dotenv = require('dotenv');
+dotenv.config();
 // const router = express.Router();
 // router.use(express.json());
 
