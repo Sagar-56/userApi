@@ -27,9 +27,9 @@ app.use(cors());
 // router.use(cors());
 
 
- MongoClient.connect(DATABASE,async (err, client) => {
+MongoClient.connect(DATABASE, async (err, client) => {
     if (err) console.log(`Error While Connecting`);
-    user =await client.db('eduInternJan');
+    user = await client.db('eduInternJan');
     app.listen(PORT, () => {
         console.log(`server is running on port ${PORT}`)
     })
@@ -37,11 +37,14 @@ app.use(cors());
 
 // database connection
 mongoose.Promise = global.Promise;
-mongoose.connect(db.DATABASE, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true  }, function (err) {
+mongoose.connect(db.DATABASE, { useNewUrlParser: true, useUnifiedTopology: true, }, function (err) {
     if (err) console.log(err);
     console.log("database is connected");
 })
 
+mongoose.connection.on('connected', () => {
+    console.log("[DB] ONLINE")
+});
 
 app.get('/', function (req, res) {
     res.status(200).send("welcome to login, signup Api")
