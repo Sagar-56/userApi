@@ -30,7 +30,7 @@ app.use(cors());
 
 MongoClient.connect(db.DATABASE, (err, client) => {
     if (err) console.log(`Error While Connecting`);
-    user = client.db('eduInternJan');
+    User = client.db('eduInternJan');
     app.listen(PORT, () => {
         console.log(`server is running on port ${PORT}`)
     })
