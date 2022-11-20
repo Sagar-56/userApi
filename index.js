@@ -77,12 +77,12 @@ app.post('/api/register', async function (req, res) {
     //         //   res.status(200).send("Registration Successful");
     //     }
     // );
-    User.findOne({ email: newUser.email }, async function (err, user) {
+    User.findOne({ email: newUser.email }, function (err, user) {
         if (user) {
             return res.status(400).json({ auth: false, message: "email exits" });
         } else {
             // Insert the new user if they do not exist yet
-            user = await new User({
+            user = new User({
                 id: req.body._id,
                 firstname: req.body.firstname,
                 lastname: req.body.lastname,
@@ -90,9 +90,9 @@ app.post('/api/register', async function (req, res) {
                 password: newUser.password,
                 password2: newUser.password2,
             });
-            const salt = await bcryptjs.genSalt(10);
-            user.password = await bcryptjs.hash(user.password, salt);
-            await user.save();
+            // const salt = await bcryptjs.genSalt(10);
+            // user.password = await bcryptjs.hash(user.password, salt);
+            user.save();
             res.send(user);
         }
 
