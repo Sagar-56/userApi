@@ -13,7 +13,7 @@ const bcryptjs = require('bcryptjs')
 const PORT = process.env.PORT || 9300;
 const DATABASE = "mongodb+srv://Sagarbehera:Sagar456@cluster0.96hmj.mongodb.net/eduInternJan?retryWrites=true&w=majority";
 
-const db = require('./configs/config').get(process.env.NODE_ENV);
+const db = require('./configs/config').get(process.env.NODE_ENV?.toString());
 const User = require('./models/users');
 const { auth } = require('./middleware/auth');
 const users = require('./models/users');
@@ -82,7 +82,7 @@ app.post('/api/register', async function (req, res) {
             return res.status(400).json({ auth: false, message: "email exits" });
         } else {
             // Insert the new user if they do not exist yet
-         User.create({
+         user.create({
                 id: req.body._id,
                 firstname: req.body.firstname,
                 lastname: req.body.lastname,
