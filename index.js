@@ -78,23 +78,22 @@ app.post('/api/register', async function (req, res) {
     //     }
     // );
     User.findOne({ email: newUser.email }, function (err, user) {
-        if (user) {
-            return res.status(400).json({ auth: false, message: "email exits" });
-        } else {
-            // Insert the new user if they do not exist yet
-         user.create({
-                id: req.body._id,
-                firstname: req.body.firstname,
-                lastname: req.body.lastname,
-                email: req.body.email,
-                password: newUser.password,
-                password2: newUser.password2,
-            });
+        if (user) return res.status(400).json({ auth: false, message: "email exits" });
+        // } else {
+        //     // Insert the new user if they do not exist yet
+        //  user.create({
+        //         id: req.body._id,
+        //         firstname: req.body.firstname,
+        //         lastname: req.body.lastname,
+        //         email: req.body.email,
+        //         password: newUser.password,
+        //         password2: newUser.password2,
+        //     });
             // const salt = await bcryptjs.genSalt(10);
             // user.password = await bcryptjs.hash(user.password, salt);
             // await user.save();
             // res.send(user);
-        }
+        // }
 
 
         newUser.save((err, doc) => {
