@@ -8,10 +8,10 @@ const dotenv = require('dotenv');
 dotenv.config();
 // const router = express.Router();
 // router.use(express.json());
-const bcryptjs = require('bcryptjs')
+// const bcryptjs = require('bcryptjs')
 
-const PORT = process.env.PORT || 9300;
-const DATABASE = "mongodb+srv://Sagarbehera:Sagar456@cluster0.96hmj.mongodb.net/eduInternJan?retryWrites=true&w=majority";
+// const PORT = process.env.PORT || 9300;
+// const DATABASE = "mongodb+srv://Sagarbehera:Sagar456@cluster0.96hmj.mongodb.net/eduInternJan?retryWrites=true&w=majority";
 
 const db = require('./configs/config').get(process.env.NODE_ENV);
 const User = require('./models/users');
@@ -28,13 +28,13 @@ app.use(cors());
 // router.use(cors());
 
 
-MongoClient.connect(DATABASE, (err, client) => {
-    if (err) console.log(`Error While Connecting`);
-    user = client.db('eduInternJan');
-    app.listen(PORT, () => {
-        console.log(`server is running on port ${PORT}`)
-    })
-})
+// MongoClient.connect(DATABASE, (err, client) => {
+//     if (err) console.log(`Error While Connecting`);
+//     user = client.db('eduInternJan');
+//     app.listen(PORT, () => {
+//         console.log(`server is running on port ${PORT}`)
+//     })
+// })
 
 // database connection
 mongoose.Promise = global.Promise;
@@ -77,24 +77,23 @@ app.post('/api/register', async function (req, res) {
     //         //   res.status(200).send("Registration Successful");
     //     }
     // );
-    User.findOne({ email: newUser.email }, function (err, user) {
-        if (user) {
-            return res.status(400).json({ auth: false, message: "email exits" });
-        } else {
-            // Insert the new user if they do not exist yet
-            user = new User({
-                id: req.body._id,
-                firstname: req.body.firstname,
-                lastname: req.body.lastname,
-                email: req.body.email,
-                password: newUser.password,
-                password2: newUser.password2,
-            });
-            // const salt = await bcryptjs.genSalt(10);
-            // user.password = await bcryptjs.hash(user.password, salt);
-            user.save();
-            res.send(user);
-        }
+    User.findOne({ email: newUser.email }, async function (err, user) {
+        if (user) return res.status(400).json({ auth: false, message: "email exits" });
+        // } else {
+        //     // Insert the new user if they do not exist yet
+        //     user = await new User({
+        //         id: req.body._id,
+        //         firstname: req.body.firstname,
+        //         lastname: req.body.lastname,
+        //         email: req.body.email,
+        //         password: newUser.password,
+        //         password2: newUser.password2,
+        //     });
+        //     const salt = await bcryptjs.genSalt(10);
+        //     user.password = await bcryptjs.hash(user.password, salt);
+        //     await user.save();
+        //     res.send(user);
+        // }
 
 
         newUser.save((err, doc) => {
@@ -163,8 +162,8 @@ app.get('/api/logout', auth, function (req, res) {
 });
 
 // listing port
-// const PORT = process.env.PORT || 2000;
+const PORT = process.env.PORT || 2000;
 
-// app.listen(PORT, () => {
-//     console.log(`app is running ${PORT}`)
-// })
+app.listen(PORT, () => {
+    console.log(`app is running ${PORT}`)
+})
