@@ -64,7 +64,7 @@ app.post('/api/register', function (req, res) {
     if (newUser.password != newUser.password2) return res.status(400).json({ message: "password not match" });
     User.create(
         {
-            id: req.body._id,
+            // id: req.body._id,
             firstname: req.body.firstname,
             lastname: req.body.lastname,
             email: req.body.email,
