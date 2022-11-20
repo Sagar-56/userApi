@@ -8,6 +8,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 // const router = express.Router();
 // router.use(express.json());
+const bcryptjs = require('bcryptjs')
 
 const PORT = process.env.PORT || 9300;
 const DATABASE = "mongodb+srv://Sagarbehera:Sagar456@cluster0.96hmj.mongodb.net/eduInternJan?retryWrites=true&w=majority";
@@ -57,27 +58,44 @@ app.get('/', function (req, res) {
 // })
 
 // adding new user (sign-up route)
-app.post('/api/register', function (req, res) {
+app.post('/api/register', async function (req, res) {
     // taking a user
 
-    const newUser = new users(req.body);
+    const newUser = await new users(req.body);
     if (newUser.password != newUser.password2) return res.status(400).json({ message: "password not match" });
-    User.create(
-        {
-            // id: req.body._id,
-            firstname: req.body.firstname,
-            lastname: req.body.lastname,
-            email: req.body.email,
-            password: newUser.password,
-            password2: newUser.password2,
-        },
-        (err, data) => {
-            if (err) return res.status(500).send("Error While Register");
-            //   res.status(200).send("Registration Successful");
+    // User.create(
+    //     {
+    //         // id: req.body._id,
+    //         firstname: req.body.firstname,
+    //         lastname: req.body.lastname,
+    //         email: req.body.email,
+    //         password: newUser.password,
+    //         password2: newUser.password2,
+    //     },
+    //     (err, data) => {
+    //         if (err) return res.status(500).send("Error While Register");
+    //         //   res.status(200).send("Registration Successful");
+    //     }
+    // );
+    User.findOne({ email: newUser.email }, async function (err, user) {
+        if (user) {
+            return res.status(400).json({ auth: false, message: "email exits" });
+        } else {
+            // Insert the new user if they do not exist yet
+            user = await new User({
+                id: req.body._id,
+                firstname: req.body.firstname,
+                lastname: req.body.lastname,
+                email: req.body.email,
+                password: newUser.password,
+                password2: newUser.password2,
+            });
+            const salt = await bcryptjs.genSalt(10);
+            user.password = await bcryptjs.hash(user.password, salt);
+            await user.save();
+            res.send(user);
         }
-    );
-    User.findOne({ email: newUser.email }, function (err, user) {
-        if (user) return res.status(400).json({ auth: false, message: "email exits" });
+
 
         newUser.save((err, doc) => {
             if (err) {
