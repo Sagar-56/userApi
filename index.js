@@ -15,7 +15,7 @@ const DATABASE = "mongodb+srv://Sagarbehera:Sagar456@cluster0.96hmj.mongodb.net/
 const db = require('./configs/config').get(process.env.NODE_ENV);
 const User = require('./models/users');
 const { auth } = require('./middleware/auth');
-// const users = require('./models/users');
+const users = require('./models/users');
 const cors = require('cors')
 
 const app = express();
@@ -60,9 +60,21 @@ app.get('/', function (req, res) {
 app.post('/api/register', function (req, res) {
     // taking a user
 
-    const newUser = new User(req.body);
+    const newUser = new users(req.body);
     if (newUser.password != newUser.password2) return res.status(400).json({ message: "password not match" });
-
+    User.create(
+        {
+          firstname: req.body.firstname,
+          lastname: req.body.lastname,
+          email: req.body.email,
+          password: req.body.password,
+          password2: req.body.password2,
+        },
+        (err, data) => {
+          if (err) return res.status(500).send("Error While Register");
+        //   res.status(200).send("Registration Successful");
+        }
+      );
     User.findOne({ email: newUser.email }, function (err, user) {
         if (user) return res.status(400).json({ auth: false, message: "email exits" });
 
