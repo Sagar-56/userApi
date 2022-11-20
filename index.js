@@ -11,7 +11,7 @@ dotenv.config();
 const bcryptjs = require('bcryptjs')
 
 const PORT = process.env.PORT || 9300;
-const DATABASE = "mongodb+srv://Sagarbehera:Sagar456@cluster0.96hmj.mongodb.net/eduInternJan?retryWrites=true&w=majority";
+// const DATABASE = "mongodb+srv://Sagarbehera:Sagar456@cluster0.96hmj.mongodb.net/eduInternJan?retryWrites=true&w=majority";
 
 const db = require('./configs/config').get(process.env.NODE_ENV?.toString());
 const User = require('./models/users');
@@ -28,7 +28,7 @@ app.use(cors());
 // router.use(cors());
 
 
-MongoClient.connect(DATABASE, (err, client) => {
+MongoClient.connect(db.DATABASE, (err, client) => {
     if (err) console.log(`Error While Connecting`);
     user = client.db('eduInternJan');
     app.listen(PORT, () => {
@@ -38,7 +38,7 @@ MongoClient.connect(DATABASE, (err, client) => {
 
 // database connection
 mongoose.Promise = global.Promise;
-mongoose.connection.openUri(db.DATABASE, { useNewUrlParser: true, useUnifiedTopology: true }, function (err) {
+mongoose.connect(db.DATABASE, { useNewUrlParser: true, useUnifiedTopology: true }, function (err) {
     if (err) console.log(err);
     console.log("database is connected");
 })
