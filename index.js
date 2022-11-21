@@ -3,18 +3,17 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const mongo = require('mongodb');
-const MongoClient = mongo.MongoClient;
+
 const dotenv = require('dotenv');
-dotenv.config({path: "./config.env"});
+dotenv.config({ path: "./config.env" });
 // const router = express.Router();
 // router.use(express.json());
 const bcryptjs = require('bcryptjs')
-
+const MongoClient = mongo.MongoClient;
 const PORT = process.env.PORT || 9300;
 // const DATABASE = "mongodb+srv://Sagarbehera:Sagar456@cluster0.96hmj.mongodb.net/eduInternJan?retryWrites=true&w=majority";
 
-const db = require('./configs/config')
-// .get(process.env.NODE_ENV);
+const db = require('./configs/config').get(process.env.NODE_ENV);
 const User = require('./models/users');
 const { auth } = require('./middleware/auth');
 const users = require('./models/users');
@@ -68,10 +67,10 @@ app.post('/api/register', async function (req, res) {
         //         password: newUser.password,
         //         password2: newUser.password2,
         //     });
-            // const salt = await bcryptjs.genSalt(10);
-            // user.password = await bcryptjs.hash(user.password, salt);
-            // await user.save();
-            // res.send(user);
+        // const salt = await bcryptjs.genSalt(10);
+        // user.password = await bcryptjs.hash(user.password, salt);
+        // await user.save();
+        // res.send(user);
         // }
 
 
