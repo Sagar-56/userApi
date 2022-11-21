@@ -13,7 +13,7 @@ const bcryptjs = require('bcryptjs')
 const PORT = process.env.PORT || 9300;
 const DATABASE = "mongodb+srv://Sagarbehera:Sagar456@cluster0.96hmj.mongodb.net/eduInternJan?retryWrites=true&w=majority";
 
-const db = require('./configs/config').get(process.env.NODE_ENV?.toString());
+const db = require('./configs/config').get(process.env.NODE_ENV);
 const User = require('./models/users');
 const { auth } = require('./middleware/auth');
 const users = require('./models/users');
