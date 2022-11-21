@@ -28,7 +28,7 @@ app.use(cors());
 // router.use(cors());
 
 
-MongoClient.connect(db.DATABASE, (err, client) => {
+MongoClient.connect(DATABASE, (err, client) => {
     if (err) console.log(`Error While Connecting`);
     user = client.db('eduInternJan');
     app.listen(PORT, () => {
@@ -55,20 +55,6 @@ app.post('/api/register', async function (req, res) {
 
     const newUser = await new users(req.body);
     if (newUser.password != newUser.password2) return res.status(400).json({ message: "password not match" });
-    // User.create(
-    //     {
-    //         // id: req.body._id,
-    //         firstname: req.body.firstname,
-    //         lastname: req.body.lastname,
-    //         email: req.body.email,
-    //         password: newUser.password,
-    //         password2: newUser.password2,
-    //     },
-    //     (err, data) => {
-    //         if (err) return res.status(500).send("Error While Register");
-    //         //   res.status(200).send("Registration Successful");
-    //     }
-    // );
     User.findOne({ email: newUser.email }, function (err, user) {
         if (user) return res.status(400).json({ auth: false, message: "email exits" });
         // } else {
