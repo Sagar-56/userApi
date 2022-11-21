@@ -38,7 +38,7 @@ MongoClient.connect(DATABASE,async (err, client) => {
 
 // database connection
 mongoose.Promise = global.Promise;
-mongoose.connect(db.process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true }, function (err) {
+mongoose.connect(db.DATABASE, { useNewUrlParser: true, useUnifiedTopology: true }, function (err) {
     if (err) console.log(err);
     console.log("database is connected");
 })
