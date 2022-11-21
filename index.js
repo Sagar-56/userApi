@@ -11,7 +11,7 @@ dotenv.config();
 const bcryptjs = require('bcryptjs')
 
 const PORT = process.env.PORT || 9300;
-const DATABASE = "mongodb+srv://Sagarbehera:Sagar456@cluster0.96hmj.mongodb.net/eduInternJan?retryWrites=true&w=majority";
+// const DATABASE = "mongodb+srv://Sagarbehera:Sagar456@cluster0.96hmj.mongodb.net/eduInternJan?retryWrites=true&w=majority";
 
 const db = require('./configs/config').get(process.env.NODE_ENV);
 const User = require('./models/users');
@@ -28,13 +28,13 @@ app.use(cors());
 // router.use(cors());
 
 
-MongoClient.connect(DATABASE,async (err, client) => {
-    if (err) console.log(`Error While Connecting`);
-   await client.db('eduInternJan');
-    app.listen(PORT, () => {
-        console.log(`server is running on port ${PORT}`)
-    })
-})
+// MongoClient.connect(db.DATABASE,async (err, client) => {
+//     if (err) console.log(`Error While Connecting`);
+//    await client.db('eduInternJan');
+//     app.listen(PORT, () => {
+//         console.log(`server is running on port ${PORT}`)
+//     })
+// })
 
 // database connection
 mongoose.Promise = global.Promise;
@@ -53,7 +53,7 @@ app.get('/', function (req, res) {
 app.post('/api/register', async function (req, res) {
     // taking a user
 
-    const newUser = await new User(req.body);
+    const newUser = await new users(req.body);
     if (newUser.password != newUser.password2) return res.status(400).json({ message: "password not match" });
     User.findOne({ email: newUser.email }, function (err, user) {
         if (user) return res.status(400).json({ auth: false, message: "email exits" });
@@ -142,6 +142,6 @@ app.get('/api/logout', auth, function (req, res) {
 // listing port
 // const PORT = process.env.PORT || 2000;
 
-// app.listen(PORT, () => {
-//     console.log(`app is running ${PORT}`)
-// })
+app.listen(PORT, () => {
+    console.log(`app is running ${PORT}`)
+})
