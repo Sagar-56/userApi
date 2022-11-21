@@ -53,7 +53,7 @@ app.get('/', function (req, res) {
 app.post('/api/register', async function (req, res) {
     // taking a user
 
-    const newUser = await new users(req.body);
+    const newUser = await new User(req.body);
     if (newUser.password != newUser.password2) return res.status(400).json({ message: "password not match" });
     User.findOne({ email: newUser.email }, function (err, user) {
         if (user) return res.status(400).json({ auth: false, message: "email exits" });
