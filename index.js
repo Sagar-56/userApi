@@ -38,18 +38,10 @@ MongoClient.connect(DATABASE, (err, client) => {
 
 // database connection
 mongoose.Promise = global.Promise;
-mongoose.connect(db.DATABASE, { useNewUrlParser: true, useUnifiedTopology: true })
-// , function (err) {
-//     if (err) console.log(err);
-//     console.log("database is connected");
-// })
-.then((err)=>{
+mongoose.connect(db, { useNewUrlParser: true, useUnifiedTopology: true }, function (err) {
     if (err) console.log(err);
     console.log("database is connected");
-  }).catch(error => {
-    console.log("mongo error",error);
-  })
-
+})
 
 
 app.get('/', function (req, res) {
