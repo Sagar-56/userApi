@@ -4,12 +4,12 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const mongo = require('mongodb');
 
-const dotenv = require('dotenv');
-dotenv.config({ path: "./config.env" });
+// const dotenv = require('dotenv');
+// dotenv.config({ path: "./config.env" });
 // const router = express.Router();
 // router.use(express.json());
-const bcryptjs = require('bcryptjs')
-const MongoClient = mongo.MongoClient;
+// const bcryptjs = require('bcryptjs')
+// const MongoClient = mongo.MongoClient;
 const PORT = process.env.PORT || 9300;
 // const DATABASE = "mongodb+srv://Sagarbehera:Sagar456@cluster0.96hmj.mongodb.net/eduInternJan?retryWrites=true&w=majority";
 
