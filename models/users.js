@@ -1,7 +1,8 @@
 var mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
 const bcryptjs = require('bcryptjs');
-const confiq = require('../configs/config').get(process.env.NODE_ENV);
+const confiq = require('../configs/config')
+// .get(process.env.NODE_ENV);
 const salt = 10;
 
 
