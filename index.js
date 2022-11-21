@@ -16,7 +16,7 @@ const PORT = process.env.PORT || 9300;
 const db = require('./configs/config').get(process.env.NODE_ENV);
 const User = require('./models/users');
 const { auth } = require('./middleware/auth');
-const users = require('./models/users');
+// const users = require('./models/users');
 const cors = require('cors')
 
 const app = express();
@@ -38,15 +38,10 @@ app.use(cors());
 
 // database connection
 mongoose.Promise = global.Promise;
-mongoose.connect(db.DATABASE, { useNewUrlParser: true, useUnifiedTopology: true })
-//     , function (err) {
-//     if (err) console.log(err);
-//     console.log("database is connected");
-// })
-const data = mongoose.connection
-
-data.on("error", (err)=>{console.error(err)})
-data.once("open", () => {console.log("DB started successfully")})
+mongoose.connect(db.DATABASE, { useNewUrlParser: true, useUnifiedTopology: true }, function (err) {
+    if (err) console.log(err);
+    console.log("database is connected");
+})
 
 
 app.get('/', function (req, res) {
@@ -58,7 +53,7 @@ app.get('/', function (req, res) {
 app.post('/api/register', async function (req, res) {
     // taking a user
 
-    const newUser = await new users(req.body);
+    const newUser = await new User(req.body);
     if (newUser.password != newUser.password2) return res.status(400).json({ message: "password not match" });
     User.findOne({ email: newUser.email }, function (err, user) {
         if (user) return res.status(400).json({ auth: false, message: "email exits" });
@@ -79,7 +74,7 @@ app.post('/api/register', async function (req, res) {
         // }
 
 
-        newUser.save((err, doc) => {
+        newUser.insertOne((err, doc) => {
             if (err) {
                 console.log(err);
                 return res.status(400).json({ success: false });
