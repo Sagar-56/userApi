@@ -28,7 +28,7 @@ app.use(cors());
 // router.use(cors());
 
 
-MongoClient.connect(DATABASE, (err, client) => {
+MongoClient.connect(db.DATABASE, (err, client) => {
     if (err) console.log(`Error While Connecting`);
     user = client.db('eduInternJan');
     app.listen(PORT, () => {
@@ -48,14 +48,6 @@ app.get('/', function (req, res) {
     res.status(200).send("welcome to login, signup Api")
 })
 
-
-// MongoClient.connect(mongoUrl, (err, client) => {
-//     if (err) console.log(`Error While Connecting`);
-//     user = client.db('eduInternJan');
-//     app.listen(PORT, () => {
-//         console.log(`server is running on port ${PORT}`)
-//     })
-// })
 
 // adding new user (sign-up route)
 app.post('/api/register', async function (req, res) {
