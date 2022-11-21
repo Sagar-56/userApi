@@ -10,8 +10,8 @@ dotenv.config();
 // router.use(express.json());
 const bcryptjs = require('bcryptjs')
 
-const PORT = process.env.PORT || 9300;
-const DATABASE = "mongodb+srv://Sagarbehera:Sagar456@cluster0.96hmj.mongodb.net/eduInternJan?retryWrites=true&w=majority";
+// const PORT = process.env.PORT || 9300;
+// const DATABASE = "mongodb+srv://Sagarbehera:Sagar456@cluster0.96hmj.mongodb.net/eduInternJan?retryWrites=true&w=majority";
 
 const db = require('./configs/config').get(process.env.NODE_ENV);
 const User = require('./models/users');
@@ -28,13 +28,13 @@ app.use(cors());
 // router.use(cors());
 
 
-MongoClient.connect(DATABASE, (err, client) => {
-    if (err) console.log(`Error While Connecting`);
-    user = client.db('eduInternJan');
-    app.listen(PORT, () => {
-        console.log(`server is running on port ${PORT}`)
-    })
-})
+// MongoClient.connect(DATABASE, (err, client) => {
+    // if (err) console.log(`Error While Connecting`);
+    // user = client.db('eduInternJan');
+    // app.listen(PORT, () => {
+        // console.log(`server is running on port ${PORT}`)
+    // })
+// })
 
 // database connection
 mongoose.Promise = global.Promise;
@@ -140,8 +140,8 @@ app.get('/api/logout', auth, function (req, res) {
 });
 
 // listing port
-// const PORT = process.env.PORT || 2000;
+const PORT = process.env.PORT || 2000;
 
-// app.listen(PORT, () => {
-//     console.log(`app is running ${PORT}`)
-// })
+app.listen(PORT, () => {
+    console.log(`app is running ${PORT}`)
+})
