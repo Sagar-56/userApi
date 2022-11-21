@@ -13,7 +13,7 @@ const bcryptjs = require('bcryptjs')
 // const PORT = process.env.PORT || 9300;
 // const DATABASE = "mongodb+srv://Sagarbehera:Sagar456@cluster0.96hmj.mongodb.net/eduInternJan?retryWrites=true&w=majority";
 
-const db = require('./configs/config').get(process.env.NODE_ENV);
+const db = require('./configs/config').get(process.env.MONGODB_URI);
 const User = require('./models/users');
 const { auth } = require('./middleware/auth');
 const users = require('./models/users');
@@ -140,7 +140,7 @@ app.get('/api/logout', auth, function (req, res) {
 });
 
 // listing port
-const PORT = process.env.PORT || 2000;
+const PORT = process.env.PORT || 9300;
 
 app.listen(PORT, () => {
     console.log(`app is running ${PORT}`)
