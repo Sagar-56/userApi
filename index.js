@@ -38,7 +38,7 @@ app.use(cors());
 
 // database connection
 mongoose.Promise = global.Promise;
-mongoose.connect(db.DATABASE, { useNewUrlParser: true, useUnifiedTopology: true }, function (err) {
+mongoose.connect("mongodb+srv://Sagarbehera:Sagar456@cluster0.96hmj.mongodb.net/eduInternJan?retryWrites=true&w=majority", { useNewUrlParser: true, useUnifiedTopology: true }, function (err) {
     if (err) console.log(err);
     console.log("database is connected");
 })
@@ -74,7 +74,7 @@ app.post('/api/register', async function (req, res) {
         // }
 
 
-        newUser.insertOne((err, doc) => {
+        newUser.save((err, doc) => {
             if (err) {
                 console.log(err);
                 return res.status(400).json({ success: false });
