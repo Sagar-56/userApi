@@ -5,7 +5,7 @@ const cookieParser = require('cookie-parser');
 const mongo = require('mongodb');
 const MongoClient = mongo.MongoClient;
 const dotenv = require('dotenv');
-dotenv.config();
+dotenv.config({path: "./configs/config.env"});
 // const router = express.Router();
 // router.use(express.json());
 const bcryptjs = require('bcryptjs')
