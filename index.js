@@ -21,16 +21,16 @@ const cors = require('cors')
 
 const app = express();
 
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 app.use(cookieParser());
 app.use(cors());
 // router.use(cors());
 
 
-MongoClient.connect(DATABASE, (err, client) => {
+MongoClient.connect(DATABASE,async (err, client) => {
     if (err) console.log(`Error While Connecting`);
-    user = client.db('eduInternJan');
+   await client.db('eduInternJan');
     app.listen(PORT, () => {
         console.log(`server is running on port ${PORT}`)
     })
