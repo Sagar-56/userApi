@@ -38,7 +38,7 @@ app.use(cors());
 
 // database connection
 mongoose.Promise = global.Promise;
-mongoose.connect(db.DATABASE, { useNewUrlParser: true, useUnifiedTopology: true }, function (err) {
+mongoose.connect("db.DATABASE, { useNewUrlParser: true, useUnifiedTopology: true }", function (err) {
     if (err) console.log(err);
     console.log("database is connected");
 })
