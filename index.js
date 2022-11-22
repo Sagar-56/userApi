@@ -13,7 +13,7 @@ const mongo = require('mongodb');
 const PORT = process.env.PORT || 9300;
 // const DATABASE = "mongodb+srv://Sagarbehera:Sagar456@cluster0.96hmj.mongodb.net/eduInternJan?retryWrites=true&w=majority";
 
-const db = require('./configs/config').get(process.env.NODE_ENV);
+const db = require('./configs/config').get(process.env.MONGODB_URI);
 const User = require('./models/users');
 const { auth } = require('./middleware/auth');
 // const users = require('./models/users');
@@ -38,7 +38,7 @@ app.use(cors());
 
 // database connection
 mongoose.Promise = global.Promise;
-mongoose.connect("mongodb+srv://Sagarbehera:Sagar456@cluster0.96hmj.mongodb.net/eduInternJan?retryWrites=true&w=majority", { useNewUrlParser: true, useUnifiedTopology: true }, function (err) {
+mongoose.connect(db.DATABASE, { useNewUrlParser: true, useUnifiedTopology: true }, function (err) {
     if (err) console.log(err);
     console.log("database is connected");
 })
