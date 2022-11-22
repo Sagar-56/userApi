@@ -7,7 +7,7 @@ const cookieParser = require('cookie-parser');
 // const PORT = process.env.PORT || 9300;
 // const DATABASE = "mongodb+srv://Sagarbehera:Sagar456@cluster0.96hmj.mongodb.net/eduInternJan?retryWrites=true&w=majority";
 
-const db = require('./configs/config').get(process.env.NODE_ENV);
+const db = require('./configs/config').get(process.env.NODE_ENV = 'production');
 const dotenv = require('dotenv');
 dotenv.config();
 const User = require('./models/users');
