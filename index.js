@@ -7,9 +7,9 @@ const cookieParser = require('cookie-parser');
 // const PORT = process.env.PORT || 9300;
 // const DATABASE = "mongodb+srv://Sagarbehera:Sagar456@cluster0.96hmj.mongodb.net/eduInternJan?retryWrites=true&w=majority";
 
-const db = require('./configs/config').get(process.env.NODE_ENV = 'production');
+const db = require('./configs/config').get(process.env.NODE_ENV);
 const dotenv = require('dotenv');
-dotenv.config();
+dotenv.config({path: db});
 const User = require('./models/users');
 const { auth } = require('./middleware/auth');
 const cors = require('cors')
