@@ -1,13 +1,13 @@
 const config = {
     production: {
         SECRET: process.env.SECRET,
-        uri: process.env.MONGODB_URI?.toString()
+        DATABASE: process.env.MONGODB_URI
 
     },
     default: {
         SECRET: 'mysecretkey',
-        // uri: 'mongodb://localhost:27017/eduInternJan'
-        uri: "mongodb+srv://Sagarbehera:Sagar456@cluster0.96hmj.mongodb.net/eduInternJan?retryWrites=true&w=majority"
+        // DATABASE: 'mongodb://localhost:27017/eduInternJan'
+        DATABASE: "mongodb+srv://Sagarbehera:Sagar456@cluster0.96hmj.mongodb.net/eduInternJan?retryWrites=true&w=majority"
     }
 }
 exports.get = function get(env) {
