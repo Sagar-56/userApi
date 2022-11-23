@@ -9,7 +9,7 @@ const cookieParser = require('cookie-parser');
 
 const db = require('./configs/config').get(process.env.NODE_ENV);
 const dotenv = require('dotenv');
-dotenv.config({path: db});
+dotenv.config();
 const User = require('./models/users');
 const { auth } = require('./middleware/auth');
 const cors = require('cors')
