@@ -6,9 +6,10 @@ const cookieParser = require('cookie-parser');
 // const MongoClient = mongo.MongoClient;
 // const PORT = process.env.PORT || 9300;
 // const DATABASE = "mongodb+srv://Sagarbehera:Sagar456@cluster0.96hmj.mongodb.net/eduInternJan?retryWrites=true&w=majority";
+
+const db = require('./configs/config').get(process.env.NODE_ENV);
 const dotenv = require('dotenv');
-dotenv.config({ path: "./configs/config.env" });
-const db = require('./configs/config').get(process.env.NODE_ENV = "production");
+dotenv.config({path: "./configs/config.env"});
 const User = require('./models/users');
 const { auth } = require('./middleware/auth');
 const cors = require('cors')
@@ -19,16 +20,6 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(cookieParser());
 app.use(cors());
-// router.use(cors());
-
-
-// MongoClient.connect(db.DATABASE,async (err, client) => {
-//     if (err) console.log(`Error While Connecting`);
-//    await client.db('eduInternJan');
-//     app.listen(PORT, () => {
-//         console.log(`server is running on port ${PORT}`)
-//     })
-// })
 
 // database connection
 mongoose.Promise = global.Promise;
@@ -52,22 +43,6 @@ app.post('/api/register', async function (req, res) {
     if (newUser.password != newUser.password2) return res.status(400).json({ message: "password not match" });
     User.findOne({ email: newUser.email }, function (err, user) {
         if (user) return res.status(400).json({ auth: false, message: "email exits" });
-        // } else {
-        //     // Insert the new user if they do not exist yet
-        //  user.create({
-        //         id: req.body._id,
-        //         firstname: req.body.firstname,
-        //         lastname: req.body.lastname,
-        //         email: req.body.email,
-        //         password: newUser.password,
-        //         password2: newUser.password2,
-        //     });
-        // const salt = await bcryptjs.genSalt(10);
-        // user.password = await bcryptjs.hash(user.password, salt);
-        // await user.save();
-        // res.send(user);
-        // }
-
 
         newUser.save((err, doc) => {
             if (err) {
